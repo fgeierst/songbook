@@ -1,15 +1,29 @@
-export const Document: React.FC<{ children: React.ReactNode }> = ({
+import styles from "./Document.css?url";
+
+export const Document: React.FC<{ children: React.ReactNode; ctx: any }> = ({
   children,
+  ctx,
 }) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Songbook</title>
+      <link rel="stylesheet" href={styles} />
       <link rel="modulepreload" href="/src/client.tsx" />
     </head>
     <body>
-      <h1>Songbook</h1>
+      <header>
+        <h1>Songbook</h1>
+        <nav>
+          <a href="/">Home</a>
+          {ctx.user ? (
+            <a href="/user/logout">Logout</a>
+          ) : (
+            <a href="/user/login">Login</a>
+          )}
+        </nav>
+      </header>
       <div id="root">{children}</div>
       <script>import("/src/client.tsx")</script>
     </body>
