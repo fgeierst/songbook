@@ -1,9 +1,19 @@
+@font-face {
+  font-family: "Atkinson Hyperlegible Mono";
+  src: url("AtkinsonHyperlegibleMono-VariableFont_wght-subset.woff2");
+  font-weight: 200 800;
+  unicode-range: U+0020-007E, U+00A0-00AC, U+00AE-00B4, U+00B6-00FF, U+0131,
+    U+0152-0153, U+02C6, U+02DA, U+02DC, U+2009, U+2013-2014, U+2018-201A,
+    U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC,
+    U+2122, U+2212, U+2215;
+}
+
 :root {
   /* Primitive colors */
   --gray-100: #f7fafc;
   --gray-200: #e2e8f0;
   --gray-500: #718096;
-  --gray-700: #4a5568;
+  --gray-700: #414a5c;
   --gray-900: #1a202c;
   --blue-600: #3182ce;
   --blue-700: #2c5aa0;
@@ -16,13 +26,19 @@
   --color-surface-muted: var(--gray-100);
   --color-border: var(--gray-200);
   --color-text: var(--gray-900);
-  --color-text-muted: var(--gray-500);
+  --color-text-muted: var(--gray-700);
   --color-primary: var(--blue-600);
-  --color-primary-hover: var(--blue-700);
+  --color-primary-hover: var(--gray-900);
   --color-danger: var(--red-500);
   --color-success: var(--green-600);
   --color-warm-black: #2a2a2a;
   --color-warm-black-hover: #1a1a1a;
+
+  --font-family-mono: "Atkinson Hyperlegible Mono", monospace;
+  --font-family-sans: system-ui, sans-serif;
+  --font-family-serif: Times New Roman, serif;
+  --font-weight-normal: 500;
+  --font-weight-bold: 700;
 }
 
 *,
@@ -32,7 +48,12 @@
 }
 
 html {
-  font-family: system-ui;
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-normal);
+}
+
+body {
+  margin: 0;
 }
 
 header {
@@ -40,7 +61,7 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0.5rem;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface);
   min-height: 60px;
@@ -56,10 +77,11 @@ h1 {
 h1 a {
   color: var(--color-text);
   text-decoration: none;
+  font-family: var(--font-family-serif);
 }
 
 h1 a:hover {
-  color: var(--color-primary);
+  color: var(--gray-900);
 }
 
 nav {
@@ -93,9 +115,8 @@ nav a:hover {
 .songs-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
 }
-
 
 .songs-list {
   display: grid;
@@ -111,16 +132,8 @@ nav a:hover {
   display: block;
   text-decoration: none;
   color: inherit;
-  transition: background-color 0.2s;
-  border-radius: 6px;
   padding: 0.75rem;
   margin: 0 -0.75rem;
-}
-
-.song-card-link:hover {
-  background: var(--color-surface-muted);
-  text-decoration: none;
-  color: inherit;
 }
 
 .song-header {
@@ -132,29 +145,20 @@ nav a:hover {
 }
 
 .song-title {
-  font-weight: 600;
   color: var(--color-text);
-}
-
-.song-key {
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
 }
 
 .song-meta {
   display: flex;
   gap: 1rem;
-  margin-bottom: 0.5rem;
   flex-wrap: wrap;
 }
 
 .song-meta span {
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
 }
 
 .song-preview {
-  font-family: "Courier New", monospace;
+  font-family: var(--font-family-mono);
   font-size: 0.875rem;
   line-height: 1.4;
   color: var(--color-text);
@@ -176,7 +180,7 @@ nav a:hover {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  font-family: var(--font-family-mono);
   margin: 0;
   padding: 0;
 }
@@ -198,7 +202,7 @@ nav a:hover {
   border: none;
   outline: none;
   padding: 1rem;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  font-family: var(--font-family-mono);
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
@@ -334,7 +338,8 @@ nav a:hover {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  font-family: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", "Consolas",
+    "Liberation Mono", "Courier New", monospace;
   margin: 0;
   padding: 0;
 }
@@ -345,7 +350,8 @@ nav a:hover {
   border: none;
   outline: none;
   padding: 1rem;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  font-family: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", "Consolas",
+    "Liberation Mono", "Courier New", monospace;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
@@ -438,7 +444,8 @@ nav a:hover {
 }
 
 .song-text {
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  font-family: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", "Consolas",
+    "Liberation Mono", "Courier New", monospace;
   font-size: 0.9rem;
   line-height: 1.6;
   color: var(--color-text);

@@ -39,27 +39,25 @@ export async function SongsList({ ctx }: RequestInfo) {
       ) : (
         <div className="songs-list">
           {songs.map((song) => (
-            <a key={song.id} href={`/songs/${song.id}`} className="song-card song-card-link">
+            <a
+              key={song.id}
+              href={`/songs/${song.id}`}
+              className="song-card song-card-link"
+            >
               <div className="song-header">
-                <div className="song-title">{song.title}</div>
-                {song.key && <div className="song-key">{song.key}</div>}
+                <div className="song-title">
+                  {song.title}
+
+                  {song.artist && (
+                    <>
+                      &nbsp;<span>({song.artist})</span>
+                    </>
+                  )}
+                </div>
               </div>
-              
+
               {(song.artist || song.album || song.year) && (
-                <div className="song-meta">
-                  {song.artist && <span>{song.artist}</span>}
-                  {song.album && <span>{song.album}</span>}
-                  {song.year && <span>{song.year}</span>}
-                </div>
-              )}
-              
-              {song.content && (
-                <div className="song-preview">
-                  {song.content.split('\n').slice(0, 3).map((line, index) => (
-                    <div key={index}>{line || '\u00A0'}</div>
-                  ))}
-                  {song.content.split('\n').length > 3 && <div>...</div>}
-                </div>
+                <div className="song-meta"></div>
               )}
             </a>
           ))}

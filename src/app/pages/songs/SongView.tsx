@@ -16,10 +16,8 @@ export async function SongView({ ctx, request }: RequestInfo) {
   let song: Song | null = null;
   let error = "";
 
-  // Extract song ID from URL path
-  const url = new URL(request.url);
-  const pathParts = url.pathname.split('/');
-  const songId = pathParts[pathParts.length - 1];
+  // Get song ID from context (set by interruptor)
+  const songId = ctx.songId;
 
   if (!songId) {
     error = "Song ID is required";
@@ -31,17 +29,17 @@ export async function SongView({ ctx, request }: RequestInfo) {
     }
   }
 
-  // Set context properties for Document component
-  ctx.isSongView = true;
-  ctx.songId = songId;
-  ctx.songTitle = song?.title || "Song";
+  // Debug: Log the context to verify it's available
+  console.log("SongView - Context received:", {
+    isSongView: ctx.isSongView,
+    songId: ctx.songId,
+    songTitle: ctx.songTitle,
+  });
 
   if (error) {
     return (
       <div className="song-view-container">
-        <div className="error-message">
-          {error}
-        </div>
+        <div className="error-message">{error}</div>
       </div>
     );
   }
@@ -55,15 +53,15 @@ export async function SongView({ ctx, request }: RequestInfo) {
   }
 
   // Build the complete content with metadata at the top
-  let fullContent = '';
-  
+  let fullContent = "";
+
   if (song.artist) fullContent += `Artist: ${song.artist}\n`;
   if (song.album) fullContent += `Album: ${song.album}\n`;
   if (song.year) fullContent += `Year: ${song.year}\n`;
   if (song.key) fullContent += `Key: ${song.key}\n`;
-  
-  if (fullContent) fullContent += '\n';
-  fullContent += song.content || '';
+
+  if (fullContent) fullContent += "\n";
+  fullContent += song.content || "";
 
   return (
     <div className="song-view-container">
