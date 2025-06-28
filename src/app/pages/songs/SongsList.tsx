@@ -39,7 +39,7 @@ export async function SongsList({ ctx }: RequestInfo) {
       ) : (
         <div className="songs-list">
           {songs.map((song) => (
-            <div key={song.id} className="song-card">
+            <a key={song.id} href={`/songs/${song.id}`} className="song-card song-card-link">
               <div className="song-header">
                 <div className="song-title">{song.title}</div>
                 {song.key && <div className="song-key">{song.key}</div>}
@@ -61,7 +61,7 @@ export async function SongsList({ ctx }: RequestInfo) {
                   {song.content.split('\n').length > 3 && <div>...</div>}
                 </div>
               )}
-            </div>
+            </a>
           ))}
         </div>
       )}

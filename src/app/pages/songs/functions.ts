@@ -83,3 +83,42 @@ export async function getSongs() {
     throw new Error("Failed to fetch songs");
   }
 }
+
+export async function getSong(songId: string) {
+  const { ctx } = requestInfo;
+
+  // Verify user is authenticated
+  if (!ctx.user) {
+    throw new Error("Authentication required");
+  }
+
+  // Validate songId parameter
+  if (!songId?.trim()) {
+    throw new Error("Song ID is required");
+  }
+
+  try {
+    // Get song by ID and user ID (security check)
+    const song = await db.song.findFirst({
+      where: {
+        id: songId.trim(),
+        userId: ctx.user.id, // Security: only return songs owned by current user
+      },
+    });
+
+    // Song not found or user doesn't have access
+    if (!song) {
+      throw new Error("Song not found");
+    }
+
+    return song;
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.message === "Song not found") {
+        throw error; // Re-throw specific not found error
+      }
+      throw new Error(`Failed to fetch song: ${error.message}`);
+    }
+    throw new Error("Failed to fetch song");
+  }
+}

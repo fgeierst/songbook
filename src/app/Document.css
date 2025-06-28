@@ -107,6 +107,22 @@ nav a:hover {
   padding: 0.75rem 0;
 }
 
+.song-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin: 0 -0.75rem;
+}
+
+.song-card-link:hover {
+  background: var(--color-surface-muted);
+  text-decoration: none;
+  color: inherit;
+}
+
 .song-header {
   display: flex;
   justify-content: space-between;
@@ -313,6 +329,136 @@ nav a:hover {
   color: var(--color-text-muted);
 }
 
+/* Song View styles */
+.song-view-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.song-view-text {
+  width: 100%;
+  min-height: 80vh;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  background: var(--color-surface);
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.song-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.song-view-title {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.back-button {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background: var(--color-surface-muted);
+}
+
+.edit-button {
+  color: var(--color-warm-black);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-warm-black);
+  border-radius: 50px;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.edit-button:hover {
+  background: var(--color-warm-black);
+  color: var(--color-surface);
+  transform: translateY(-1px);
+}
+
+.song-view-content {
+  line-height: 1.6;
+}
+
+.song-metadata {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--color-surface-muted);
+  border-radius: 8px;
+}
+
+.metadata-item {
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.metadata-item:last-child {
+  margin-bottom: 0;
+}
+
+.metadata-label {
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.song-content {
+  background: var(--color-surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+}
+
+.song-text {
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.empty-content {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-muted);
+}
+
+.empty-content p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 640px) {
   .song-header {
@@ -352,5 +498,37 @@ nav a:hover {
 
   .editor-textarea {
     min-height: 70vh;
+  }
+
+  .song-view-header {
+    flex-direction: row;
+    padding: 0.75rem 0;
+  }
+
+  .song-view-title {
+    font-size: 1.25rem;
+  }
+
+  .back-button,
+  .edit-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .song-metadata {
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .song-content {
+    padding: 1rem;
+  }
+
+  .song-text {
+    font-size: 0.85rem;
+  }
+
+  .empty-content {
+    padding: 1.5rem;
   }
 }

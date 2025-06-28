@@ -15,6 +15,9 @@ export type AppContext = {
   session: Session | null;
   user: User | null;
   isEditor?: boolean;
+  isSongView?: boolean;
+  songTitle?: string;
+  songId?: string;
 };
 
 export default defineApp([
