@@ -1,9 +1,10 @@
 import { defineApp, ErrorResponse } from "rwsdk/worker";
 import { route, render, prefix } from "rwsdk/router";
 import { Document } from "@/app/Document";
-import { Home } from "@/app/pages/Home";
 import { setCommonHeaders } from "@/app/headers";
 import { userRoutes } from "@/app/pages/user/routes";
+import { songRoutes } from "@/app/pages/songs/routes";
+import { SongsList } from "@/app/pages/songs/SongsList";
 import { sessions, setupSessionStore } from "./session/store";
 import { Session } from "./session/durableObject";
 import { type User, db, setupDb } from "@/db";
@@ -13,6 +14,7 @@ export { SessionDurableObject } from "./session/durableObject";
 export type AppContext = {
   session: Session | null;
   user: User | null;
+  isEditor?: boolean;
 };
 
 export default defineApp([
@@ -46,8 +48,7 @@ export default defineApp([
     }
   },
   render(Document, [
-    route("/", Home),
-    route("/protected", [
+    route("/", [
       ({ ctx }) => {
         if (!ctx.user) {
           return new Response(null, {
@@ -56,8 +57,9 @@ export default defineApp([
           });
         }
       },
-      Home,
+      SongsList,
     ]),
     prefix("/user", userRoutes),
+    ...songRoutes,
   ]),
 ]);

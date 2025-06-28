@@ -27,6 +27,22 @@ model User {
   createdAt   DateTime    @default(now())
 
   credentials Credential[] // Relationship: One user can have many credentials
+  songs       Song[]       // Relationship: One user can have many songs
+}
+
+model Song {
+  id        String   @id @default(uuid()) // Song ID (UUID-based)
+  title     String   // Required string field
+  artist    String?  // Optional string field
+  album     String?  // Optional string field
+  year      Int?     // Optional integer field
+  key       String?  // Optional string field for musical key
+  content   String?  // Optional string field for lyrics/chords
+  createdAt DateTime @default(now()) // Auto-generated timestamp
+  userId    String   // Foreign key to User model
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId]) // Index on userId for efficient user song queries
 }
 
 model Credential {

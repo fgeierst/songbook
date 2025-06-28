@@ -14,13 +14,21 @@ export const Document: React.FC<{ children: React.ReactNode; ctx: any }> = ({
     </head>
     <body>
       <header>
-        <h1>Songbook</h1>
+        <h1><a href="/">Songbook</a></h1>
         <nav>
-          <a href="/">Home</a>
-          {ctx.user ? (
-            <a href="/user/logout">Logout</a>
+          {ctx.isEditor && ctx.user ? (
+            <button type="submit" form="editor-form" className="btn btn-primary save-btn">
+              Save
+            </button>
           ) : (
-            <a href="/user/login">Login</a>
+            <>
+              {ctx.user && <a href="/new" className="btn btn-primary">New</a>}
+              {ctx.user ? (
+                <a href="/user/logout">Logout</a>
+              ) : (
+                <a href="/user/login">Login</a>
+              )}
+            </>
           )}
         </nav>
       </header>
